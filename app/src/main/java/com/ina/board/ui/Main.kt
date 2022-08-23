@@ -18,17 +18,17 @@ import androidx.compose.ui.unit.dp
 import com.ina.board.MainActivity.Companion.todoViewModel
 
 @Composable
-fun Main() {
+fun Main(
+) {
 
     var isDialog by remember { mutableStateOf(false) }
-    val data by todoViewModel.todo.observeAsState()
+    val data: String by todoViewModel.todo.observeAsState("")
 
     if (isDialog) {
-
         Log.d("dialog", "$isDialog")
         TodoInputDialog(
             action = { isDialog = false },
-            disAction = { isDialog = false }
+            disAction = { isDialog = false },
         )
     }
     Log.d("dialog", "$isDialog")
@@ -59,7 +59,7 @@ fun Main() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(text ="Hello World")
+                Text(text = data)
             }
         }
     }

@@ -15,12 +15,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.ina.board.MainActivity
+import com.ina.board.MainActivity.Companion.todoViewModel
 
 @Composable
 fun TodoInputDialog (
     action: () -> Unit,
     disAction: () -> Unit,
-//    content: @Composable () -> Unit
 ) {
     Dialog(onDismissRequest = { /*TODO*/ }, ) {
         Surface(
@@ -68,7 +69,9 @@ fun DialogContent(
                 .height(12.dp)
                 .fillMaxWidth()
         )
-        TextField(value = textState.value, onValueChange = { textValue -> textState.value = textValue })
+        TextField(value = textState.value, onValueChange = {
+                textValue -> textState.value = textValue
+        })
         Spacer(
             modifier = Modifier
                 .height(12.dp)
@@ -89,7 +92,8 @@ fun DialogContent(
             }
             Button(
                 onClick = {
-                          action.invoke()
+                    todoViewModel.onTodoChange(textState.value)
+                    action.invoke()
                 }, modifier = Modifier
                     .padding(horizontal = 15.dp),
                 shape = RoundedCornerShape(20.dp)
